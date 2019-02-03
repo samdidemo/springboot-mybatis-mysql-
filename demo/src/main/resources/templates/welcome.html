@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="/favicon.ico">-->
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--<style>-->
+        <!--body{background: url(/static/image/sujiao_paodao-002.jpg)no-repeat;background-size:cover;font-size: 16px;}-->
+    <!--</style>-->
+    <style>
+        .body1{
+            background-image: url(/proscenium/images/1.jpg)
+        }
+    </style>
+</head>
+<body class="body1">
+<div class="container" >
+
+    <form class="form-signin" th:action="@{/login}"  th:method="post" name="myform">
+        <h2 class="form-signin-heading">请登录</h2>
+        <label for="inputEmail" class="sr-only">用户名</label>
+        <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="userName">
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> 记住我
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="check(this.form)">Sign in</button>
+    </form>
+
+</div>
+<script>
+function check(form) {
+    if(form.userName.value=='')
+    {
+        alert("账号不能为空");
+        form.userName.focus();
+    }
+
+    if(form.password.value==''){
+        alert("密码不能为空");
+        form.password.focus();
+    }
+
+    // else
+    //     document.myform.submit();
+    // $.ajax({
+    //         type:"POST",
+    //         url: "http://localhost:8080/login?userName="+form.userName+"&password="+form.password,
+    //         dataType:"json",
+    //         success:function(data){
+    //             if(data=="1"){
+    //                 alert("成功");
+    //             }else{
+    //                 alert("失败");
+    //             }
+    //         },
+    //         error:function(){
+    //             alert("发生错误：");
+    //         }
+    //     });
+}
+</script>
+<!-- /container -->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

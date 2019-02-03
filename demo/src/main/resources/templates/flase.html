@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>
+</head>
+<body>
+<table class="table table-bordered" id='tabletest'>
+    <tr>
+        <th>学号</th>
+        <th>名字</th>
+        <th>密码</th>
+        <th>地址</th>
+        <th>学院</th>
+        <th>入学年份</th>
+    </tr>
+</table>
+<!--<div>
+    <table data-toggle="table"  id="WorkTable"  data-height="246" data-pagination="true">
+        <thead>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="WorkOrderId" data-align="right">派工单号</th>
+            <th data-field="Vmodel" data-align="right">车辆型号</th>
+            <th data-field="RepairDate" data-align="center">报修日期</th>
+            <th data-field="CustomerName" data-align="">客户名称</th>
+        </tr>
+        </thead>
+    </table>
+    <button  id="jj" onclick="mytest()">点击</button>
+</div>
+<script>
+    function mytest(){
+        document.getElementById("jj").innerHTML="我改变啦";
+    }
+
+    $(function(){
+        $.ajax({
+            type: "GET",
+            url: "/WorkOrder/WorkOrderData",
+            dataType: "json",
+            success: function (msg) {
+                document.getElementById()
+            },
+            error: function () {
+                alert("错误");
+            }
+        });
+    });
+
+</script>-->
+</body>
+<script>
+    $(function(){
+        $.ajax({
+            url:'http://localhost:8080/student/All',
+            type:'get',
+            dataType:'json',
+            success:function(data){
+                //方法中传入的参数data为后台获取的数据
+                for(i in data) //data.data指的是数组，数组里是8个对象，i为数组的索引
+                {
+                    var tr;
+                    tr='<td>'+data[i].id+'</td>'+'<td>'+data[i].name+'</td>'+'<td>'+data[i].password+'</td>'+'<td>'+data[i].adress+'</td>'+'<td>'+data[i].school+'</td>'+'<td>'+data[i].eron+'</td>'
+                    $("#tabletest").append('<tr>'+tr+'</tr>')
+                }
+            }
+        })
+    })
+</script>
+</html>

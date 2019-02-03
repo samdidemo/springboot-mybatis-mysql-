@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyb.demo.mapper.OrderMapper">
+
+  <resultMap id="BaseResultMap" type="com.lyb.demo.model.Order">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="intime" jdbcType="VARCHAR" property="intime" />
+    <result column="outtime" jdbcType="VARCHAR" property="outtime" />
+    <result column="roomtype" jdbcType="VARCHAR" property="roomtype" />
+    <result column="payif" jdbcType="INTEGER" property="payif" />
+    <result column="monney" jdbcType="INTEGER" property="monney" />
+    <result column="roomNum" jdbcType="VARCHAR" property="roomnum" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lyb.demo.model.Order">
+    insert into t_order (id, username, intime, 
+      outtime, roomtype, payif, 
+      monney, roomNum)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{intime,jdbcType=VARCHAR},
+      #{outtime,jdbcType=VARCHAR}, #{roomtype,jdbcType=VARCHAR}, #{payif,jdbcType=INTEGER},
+      #{monney,jdbcType=INTEGER}, #{roomnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lyb.demo.model.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="intime != null">
+        intime,
+      </if>
+      <if test="outtime != null">
+        outtime,
+      </if>
+      <if test="roomtype != null">
+        roomtype,
+      </if>
+      <if test="payif != null">
+        payif,
+      </if>
+      <if test="monney != null">
+        monney,
+      </if>
+      <if test="roomnum != null">
+        roomNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="intime != null">
+        #{intime,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null">
+        #{outtime,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtype != null">
+        #{roomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="payif != null">
+        #{payif,jdbcType=INTEGER},
+      </if>
+      <if test="monney != null">
+        #{monney,jdbcType=INTEGER},
+      </if>
+      <if test="roomnum != null">
+        #{roomnum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectAll" resultType="com.lyb.demo.model.Order">
+    select * from t_order
+  </select>
+  <update id="updatePay" >
+    update t_order set payif=1 where id=#{id}
+  </update>
+  <select id="findMaxId" resultType="String">
+    select max(id) from t_order
+  </select>
+  <delete id="deleteOrderById">
+    delete from t_order where id=#{id}
+  </delete>
+</mapper>
