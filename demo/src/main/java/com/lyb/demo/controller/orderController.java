@@ -2,6 +2,7 @@ package com.lyb.demo.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.lyb.demo.mapper.OrderMapper;
+import com.lyb.demo.mapper.RoomMapper;
 import com.lyb.demo.model.Order;
 import com.lyb.demo.model.TableSplitResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.List;
 public class orderController {
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private RoomMapper roomMapper;
 
     /**
      * 获取所有订单
@@ -45,10 +48,10 @@ public class orderController {
      * 暂时去掉
      * 2019.2.3
      */
-  /*  @PostMapping(value = "/order/add")
+    @PostMapping(value = "/order/add")
     @ResponseBody
-    public int addOrder(@RequestParam("username") String name, @RequestParam("inttime")String inttime, @RequestParam("outtime")String outtime,@RequestParam("roomtype") String roomtype
-    ,@RequestParam("payif") int payif,@RequestParam("monney") int monney,@RequestParam("roomNum") String roomNum){
+    public String  addOrder(@RequestParam("username") String name, @RequestParam("inttime")String inttime, @RequestParam("outtime")String outtime,@RequestParam("roomtype") String roomtype
+    ,@RequestParam("monney") int monney,@RequestParam("roomNum") String roomNum){
         Order order=new Order();
         String maxId = orderMapper.findMaxId();
         Integer maxid=Integer.parseInt(maxId)+1;
@@ -59,10 +62,15 @@ public class orderController {
         order.setRoomnum(roomNum);
         order.setRoomtype(roomtype);
         order.setMonney(monney);
-        order.setPayif(payif);
-        orderMapper.insert(order);
-        return 1;
-    }*/
+        order.setPayif(1);
+        roomMapper.updateRoomStatus(roomNum);
+        if(orderMapper.insert(order)==1){
+            return "1";
+        }else
+        {
+            return "0";
+        }
+    }
 
     /**
      * 订单分页
@@ -106,12 +114,18 @@ public class orderController {
         order.setUsername(name);
         order.setIntime(intTime);
         order.setOuttime(outTime);
-        order.setRoomnum("0");
         order.setRoomtype(roomtype);
+        order.setRoomnum("0");
         order.setMonney(0);
         order.setPayif(0);
-        orderMapper.insert(order);
-        return 1;
+        if(orderMapper.insert(order)==1){
+
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
     /**
      * 订单删除

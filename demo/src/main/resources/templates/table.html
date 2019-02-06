@@ -36,7 +36,7 @@
     <script src="/bootstrap-table/bootstrap-table.js"></script>
     <!-- 这个汉化包可选，但是必须在bootstrap-table.js后面哦 -->
     <script src="/bootstrap-table/bootstrap-table-zh-CN.js"></script>
-    <script>
+    <!--<script>
         function my() {
 
             var t = $("#table_server").bootstrapTable({
@@ -114,7 +114,7 @@
              });*/
 
         }
-    </script>
+    </script>-->
     <style>
         .self{
             margin: 0 auto;
@@ -366,7 +366,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <!--<button  class="btn btn-info btn-fill btn-wd" style="margin-right: 100px"  onclick="my()">查询</button>-->
-                            <button class="btn btn-success" onclick="my()"><i class=" fa fa-refresh "></i>查看列表</button>
+                            <!--<button class="btn btn-success" onclick="my()"><i class=" fa fa-refresh "></i>查看列表</button>-->
                             <button class="btn btn-primary"><i class="fa fa-edit "></i>删除</button>
                             <button class="btn btn-danger"><i class="fa fa-pencil"></i>修改</button>
                         </div>
@@ -424,6 +424,7 @@
     </div>
 </div>
 <script>
+
     $(function(){
         var t = $("#table_server").bootstrapTable({
             url: 'http://localhost:8080/student/page',
@@ -509,14 +510,9 @@
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
-
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>

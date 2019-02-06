@@ -67,6 +67,11 @@ public class textController {
     public String icons(){
         return "icons";
     }
+    @GetMapping(value = "/1")
+    public String icons1(){
+        return "thetext";
+    }
+
 
 
 
