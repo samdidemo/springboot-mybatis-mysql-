@@ -87,4 +87,7 @@
   <delete id="deleteOrderById">
     delete from t_order where id=#{id}
   </delete>
+  <update id="updateOrderMonney">
+    update t_order set monney=#{monney} where id=#{id}
+  </update>
 </mapper>

@@ -26,12 +26,7 @@
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/themify-icons.css" rel="stylesheet">
-	<!--  Fonts and icons     -->
-	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-	<link href="assets/css/themify-icons.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
 	<link href="/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css">
 	<script src="/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -169,6 +164,9 @@
 								<div class="self">
 									<table  id="table_room"></table>
 								</div>
+								<!--<div>
+									<p id="mytest">哈哈哈哈</p>
+								</div>-->
 							</div>
 						</div>
                     </div>
@@ -216,7 +214,7 @@
 	$(function my() {
 
 		var t = $("#table_room").bootstrapTable({
-			url: 'http://localhost:8080/room/all',
+			url: 'http://localhost:8080/room/page',
 			method: 'get',
 			dataType: "json",
 			striped: true,//设置为 true 会有隔行变色效果
@@ -231,9 +229,9 @@
 			// showPaginationSwitch:true,//是否显示 数据条数选择框
 			pageSize: 10,//如果设置了分页，页面数据条数
 			pageList: [5, 10, 20, 40],	//如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。
-			paginationPreText: '?',//指定分页条中上一页按钮的图标或文字,这里是<
-			paginationNextText: '?',//指定分页条中下一页按钮的图标或文字,这里是>
-			// singleSelect: false,//设置True 将禁止多选
+			paginationPreText: '<',//指定分页条中上一页按钮的图标或文字,这里是<
+			paginationNextText: '>',//指定分页条中下一页按钮的图标或文字,这里是>
+			singleSelect: false,//设置True 将禁止多选
 			search: true, //显示搜索框
 			data_local: "zh-US",//表格汉化
 			sidePagination: "server", //服务端处理分页
@@ -295,9 +293,9 @@
 						else{
 							return[
 								'<span class="label label-danger">否</span>'
-
 							].join("")
 						}
+						// document.getElementById(mytest).innerHTML='测试'
 					}
 				},
 				{
@@ -333,13 +331,10 @@
 	});
 </script>
 
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<!--<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>-->
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
-
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>

@@ -51,7 +51,7 @@ public class orderController {
     @PostMapping(value = "/order/add")
     @ResponseBody
     public String  addOrder(@RequestParam("username") String name, @RequestParam("inttime")String inttime, @RequestParam("outtime")String outtime,@RequestParam("roomtype") String roomtype
-    ,@RequestParam("monney") int monney,@RequestParam("roomNum") String roomNum){
+    ,@RequestParam("roomNum") String roomNum){
         Order order=new Order();
         String maxId = orderMapper.findMaxId();
         Integer maxid=Integer.parseInt(maxId)+1;
@@ -61,13 +61,19 @@ public class orderController {
         order.setOuttime(outtime);
         order.setRoomnum(roomNum);
         order.setRoomtype(roomtype);
-        order.setMonney(monney);
+        int money=roomMapper.selectRoomPrice(roomNum);
+        System.out.println(money);
+        order.setMonney(money);
         order.setPayif(1);
-        roomMapper.updateRoomStatus(roomNum);
         if(orderMapper.insert(order)==1){
+            System.out.println("订单添加成功");
+            System.out.println("修改房间状态");
+            roomMapper.updateRoomStatus(roomNum);
+            System.out.println("修改房间状态成功");
             return "1";
         }else
         {
+            System.out.println("订单添加失败");
             return "0";
         }
     }
@@ -134,6 +140,17 @@ public class orderController {
     @ResponseBody
     public int deleteOrderById(@PathVariable("id") String id){
         return orderMapper.deleteOrderById(id);
+    }
+    /**
+     * 根据对应的房间对订单中的已付金额进行修改
+     * lyb
+     * 2.7
+     */
+    @GetMapping(value = "/order/update/{id}/{monney}")
+    @ResponseBody
+    public  int updateOrderMonney(@PathVariable("monney") String monney,@PathVariable("id")String id){
+        return orderMapper.updateOrderMonney(id,monney);
+
     }
 
 

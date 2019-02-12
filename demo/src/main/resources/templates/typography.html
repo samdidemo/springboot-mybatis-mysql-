@@ -13,7 +13,7 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+   <!-- <link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->
 
     <!-- Animation library for notifications   -->
     <link href="assets/css/animate.min.css" rel="stylesheet"/>
@@ -25,8 +25,7 @@
     <link href="assets/css/demo.css" rel="stylesheet" />
 
     <!--  Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+   <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">-->
     <link href="assets/css/themify-icons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
     <link href="/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css">
@@ -36,7 +35,7 @@
     <!-- 这个汉化包可选，但是必须在bootstrap-table.js后面哦 -->
     <script src="/bootstrap-table/bootstrap-table-zh-CN.js"></script>
     <script src="jqueryform.js" type="text/javascript"></script>
-    <script>
+    <!--<script>
         function my() {
 
             var t = $("#table_server").bootstrapTable({
@@ -145,7 +144,7 @@
             });
 
         }
-    </script>
+    </script>-->
 
 </head>
 <body onload="">
@@ -354,7 +353,7 @@
                         </div>
                         <div class="fields-w3ls form-date-w3-agileits">
                             <p>到达日期</p>
-                            <input  id="datepicker1" name="inttime" type="text" value="入住时间" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
+                            <input  id="datepicker1" name="inttime"   autocomplete="off" type="text" value="入住时间" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
                         </div>
                         <div class="fields-w3ls form-date-w3-agileits">
                             <p>出发日期</p>
@@ -364,10 +363,10 @@
                             <p>房号</p>
                             <input type="text" class="form-control" name="roomNum">
                         </div>
-                        <div class="fields-w3ls form-left-agileits-w3layouts ">
+                        <!--<div class="fields-w3ls form-left-agileits-w3layouts ">
                             <p>金额</p>
                             <input type="text" class="form-control" name="monney">
-                        </div>
+                        </div>-->
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -415,6 +414,23 @@
         "click #TableEdtior":function (e,value,row,index) {
             $.ajax({
                 url: '/order/update/pay/'+row.id,
+                data: "dd",
+                success: "dd",
+                dataType: "json"
+            });
+            if(row.roomtype=='豪华单人房')
+            {
+                var  roomMoney=1000
+            }
+            if(row.roomtype=='豪华双人房'){
+
+                roomMoney=2000
+            }else
+            {
+                roomMoney=500
+            }
+            $.ajax({
+                url: '/order/update/'+row.id+'/'+roomMoney,
                 data: "dd",
                 success: "dd",
                 dataType: "json"
@@ -517,18 +533,13 @@
                     title: '金额',
                     field: 'monney',
                     align: 'center',
-                    /*formatter: function (value, row, index) {//自定义显示，这三个参数分别是：value该行的属性，row该行记录，index该行下标
-                        return row.userStatus == 0 ? "正常" : row.userStatus == 1 ? "请假" : "离职";
-                    }*/
+
 
                 },
                 {
                     title: '房号',
                     field: 'roomnum',
                     align: 'center',
-                    /*formatter: function (value, row, index) {//自定义显示，这三个参数分别是：value该行的属性，row该行记录，index该行下标
-                        return row.userStatus == 0 ? "正常" : row.userStatus == 1 ? "请假" : "离职";
-                    }*/
 
                 },
                 {
@@ -563,5 +574,13 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
+<!-- Calendar -->
+<script src="proscenium/js/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+    });
+</script>
+<!-- //Calendar -->
 
 </html>

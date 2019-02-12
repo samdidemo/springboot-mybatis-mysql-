@@ -16,4 +16,5 @@ public interface OrderMapper {
     String findMaxId();
 
     int deleteOrderById(String id);
+    int updateOrderMonney(String id,String monney);
 }
