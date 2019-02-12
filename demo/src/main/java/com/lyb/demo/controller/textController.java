@@ -5,6 +5,7 @@ import com.lyb.demo.mapper.OrderMapper;
 import com.lyb.demo.mapper.StudentMMapper;
 import com.lyb.demo.model.Manage;
 import com.lyb.demo.model.Order;
+import com.lyb.demo.util.Dateutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -103,6 +104,18 @@ public class textController {
     @ResponseBody
     public List<Manage> selectAll(){
         return manageMapper.selectAll();
+    }
+
+    /**
+     * 获取当前时间
+     * 已测试
+     * lyb
+     * @return
+     */
+    @GetMapping(value = "/getNowDate")
+    @ResponseBody
+    public String getNowDate(){
+        return Dateutil.getDate();
     }
 
 }

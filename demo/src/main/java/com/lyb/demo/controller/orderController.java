@@ -1,13 +1,19 @@
 package com.lyb.demo.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.lyb.demo.mapper.MoneyMapper;
 import com.lyb.demo.mapper.OrderMapper;
 import com.lyb.demo.mapper.RoomMapper;
+import com.lyb.demo.model.Money;
 import com.lyb.demo.model.Order;
 import com.lyb.demo.model.TableSplitResult;
+import com.lyb.demo.util.Dateutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,6 +27,8 @@ public class orderController {
     private OrderMapper orderMapper;
     @Autowired
     private RoomMapper roomMapper;
+    @Autowired
+    private MoneyMapper moneyMapper;
 
     /**
      * 获取所有订单
@@ -47,6 +55,7 @@ public class orderController {
      * 后台增加订单
      * 暂时去掉
      * 2019.2.3
+     * 其中财务显示的主键是固定的，需要修改
      */
     @PostMapping(value = "/order/add")
     @ResponseBody
@@ -65,6 +74,19 @@ public class orderController {
         System.out.println(money);
         order.setMonney(money);
         order.setPayif(1);
+
+        /*Date nowDate=new Date();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println("当前时间为: " + simpleDateFormat.format(nowDate));*/
+        Money intcomeMoney=new Money();
+        intcomeMoney.setId("10011");
+        intcomeMoney.setMoney(money);
+        intcomeMoney.setRemarks(roomtype);
+        intcomeMoney.setResourse("房间收入");
+        intcomeMoney.setTime(Dateutil.getDate());
+        int totalMoney= moneyMapper.selectTotalMoney();
+        intcomeMoney.setTotalmoney(totalMoney+money);
+        moneyMapper.insert(intcomeMoney);
         if(orderMapper.insert(order)==1){
             System.out.println("订单添加成功");
             System.out.println("修改房间状态");
