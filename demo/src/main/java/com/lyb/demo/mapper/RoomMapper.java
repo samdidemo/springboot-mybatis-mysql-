@@ -11,7 +11,7 @@ public interface RoomMapper {
 
     List<Room> selectAll();
 
-    int updateRoomStatus(String id);
+    int updateRoomStatus(String status,String id);
 
     int selectRoomPrice(String id);
 }

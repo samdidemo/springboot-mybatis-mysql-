@@ -11,7 +11,9 @@
 下面是效果图
 
 前端填写姓名，入住时间，离开时间，房型进行预订
-
+#后台管理订单页面进行房间订单的创建
+订单的金额是根据房间的房型进行自动填入
+订单形成的时候进行财务表的更新以及房间入住状态的改变
 # springboot-bootstrap-thymeleaf-mybatis-
 ![image](https://github.com/samdidemo/springboot-mybatis-mysql-/blob/master/image/QQ%E6%88%AA%E5%9B%BE20190203120604.png)
 ![image](https://github.com/samdidemo/springboot-mybatis-mysql-/blob/master/image/QQ%E6%88%AA%E5%9B%BE20190203122401.png)

@@ -3,7 +3,7 @@
 <mapper namespace="com.lyb.demo.mapper.OrderMapper">
 
   <resultMap id="BaseResultMap" type="com.lyb.demo.model.Order">
-    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="intime" jdbcType="VARCHAR" property="intime" />
     <result column="outtime" jdbcType="VARCHAR" property="outtime" />
@@ -13,10 +13,10 @@
     <result column="roomNum" jdbcType="VARCHAR" property="roomnum" />
   </resultMap>
   <insert id="insert" parameterType="com.lyb.demo.model.Order">
-    insert into t_order (id, username, intime, 
+    insert into t_order ( username, intime,
       outtime, roomtype, payif, 
       monney, roomNum)
-    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{intime,jdbcType=VARCHAR},
+    values ( #{username,jdbcType=VARCHAR}, #{intime,jdbcType=VARCHAR},
       #{outtime,jdbcType=VARCHAR}, #{roomtype,jdbcType=VARCHAR}, #{payif,jdbcType=INTEGER},
       #{monney,jdbcType=INTEGER}, #{roomnum,jdbcType=VARCHAR})
   </insert>
@@ -50,7 +50,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -81,7 +81,7 @@
   <update id="updatePay" >
     update t_order set payif=1 where id=#{id}
   </update>
-  <select id="findMaxId" resultType="String">
+  <select id="findMaxId" resultType="int">
     select max(id) from t_order
   </select>
   <delete id="deleteOrderById">

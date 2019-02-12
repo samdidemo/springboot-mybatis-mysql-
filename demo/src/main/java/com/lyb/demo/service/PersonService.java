@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class PersonS {
+public class PersonService {
     @Resource
-    private PersonMapper personM;
+    private PersonMapper personMapper;
 
     public Person getPerson(Integer id){
-        return personM.selectByPrimaryKey(id);
+        return personMapper.selectByPrimaryKey(id);
     }
 
     public int savePerson(Integer id,Integer age,String name){
@@ -19,18 +19,19 @@ public class PersonS {
         p.setId(id);
         p.setAge(age);
         p.setName(name);
-        return personM.insert(p);
+        p.setIfmember(0);
+        return personMapper.insert(p);
     }
 
     public int updatePerson(Integer id,Integer age,String name){
-        Person p = personM.selectByPrimaryKey(id);
+        Person p = personMapper.selectByPrimaryKey(id);
         p.setAge(age);
         p.setName(name);
-        return personM.updateByPrimaryKey(p);
+        return personMapper.updateByPrimaryKey(p);
     }
 
     public int deletePerson(Integer id){
-        return personM.deleteByPrimaryKey(id);
+        return personMapper.deleteByPrimaryKey(id);
     }
 }
 

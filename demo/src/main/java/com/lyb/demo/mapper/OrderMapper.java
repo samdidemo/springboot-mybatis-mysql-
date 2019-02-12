@@ -11,10 +11,23 @@ public interface OrderMapper {
 
     List<Order> selectAll();
 
+    /**
+     * 更新订单付款状态
+     * lyb
+     * @param id
+     * @return
+     */
     int updatePay(String id);
 
-    String findMaxId();
+    //String findMaxId();
 
     int deleteOrderById(String id);
-    int updateOrderMonney(String id,String monney);
+
+    /**
+     * 更新订单已付款金额
+     * @param id
+     * @param monney
+     * @return
+     */
+    int updateOrderMonney(Integer id,Integer monney);
 }

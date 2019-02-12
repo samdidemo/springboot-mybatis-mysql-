@@ -7,6 +7,8 @@ public class Person {
 
     private String name;
 
+    private Integer ifmember;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Person {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getIfmember() {
+        return ifmember;
+    }
+
+    public void setIfmember(Integer ifmember) {
+        this.ifmember = ifmember;
     }
 }

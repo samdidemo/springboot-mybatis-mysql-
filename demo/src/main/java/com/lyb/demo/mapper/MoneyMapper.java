@@ -2,6 +2,8 @@ package com.lyb.demo.mapper;
 
 import com.lyb.demo.model.Money;
 
+import java.util.List;
+
 public interface MoneyMapper {
     int deleteByPrimaryKey(String id);
 
@@ -14,5 +16,8 @@ public interface MoneyMapper {
     int updateByPrimaryKeySelective(Money record);
 
     int updateByPrimaryKey(Money record);
+
     int selectTotalMoney();
+
+    List<Money> selectAll();
 }

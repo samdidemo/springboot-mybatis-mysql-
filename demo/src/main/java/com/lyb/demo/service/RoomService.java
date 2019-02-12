@@ -21,4 +21,8 @@ public class RoomService {
     public List<Room> selectAllRoom(){
         return roomMapper.selectAll();
     }
+
+    public int updateRoomStatus(String id,String status){
+        return roomMapper.updateRoomStatus(status,id);
+    }
 }

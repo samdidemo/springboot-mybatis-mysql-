@@ -1,6 +1,6 @@
 package com.lyb.demo.controller;
 import com.lyb.demo.model.Person;
-import com.lyb.demo.service.PersonS;
+import com.lyb.demo.service.PersonService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 public class PersonController {
 
     @Resource
-    private PersonS personS;
+    private PersonService personS;
     //增加
     @PostMapping(value="/person")
     public int savePerson(@RequestParam("id") Integer id,@RequestParam("age") Integer age,@RequestParam("name") String name){

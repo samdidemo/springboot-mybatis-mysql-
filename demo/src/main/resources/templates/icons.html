@@ -182,8 +182,8 @@
 <script>
 	function AddFunctionAlty(value,row,index) {
 		return[
-			'<button id="TableEdtior" type="button" class="btn btn-success">设为已付</button>',
-			'<button id="TableUpdate" type="button" class="btn btn-primary">修改</button>',
+			'<button id="TableEdtior" type="button" class="btn btn-success">已住</button>',
+			'<button id="TableUpdate" type="button" class="btn btn-primary">退房</button>',
 			'<button id="TableDelete" type="button" class="btn btn-danger">删除</button>'
 
 		].join("")
@@ -191,23 +191,25 @@
 	window.operateEvents={
 		"click #TableEdtior":function (e,value,row,index) {
 			$.ajax({
-				url: '/order/update/pay/'+row.id,
+				url: '/update/room/1/'+row.id,
 				data: "dd",
 				success: "dd",
 				dataType: "json"
 			});
-			$('#table_server').bootstrapTable('refresh')
+			$('#table_room').bootstrapTable('refresh')
 
 
 		},
-		"click #TableDelete":function (e,value,row) {
+		"click #TableUpdate":function (e,value,row) {
 			$.ajax({
-				url: '/order/delete/'+row.id,
+				url: '/update/room/0/'+row.id,
 				data: "dd",
 				success: "dd",
 				dataType: "json"
 			});
-			$('#table_server').bootstrapTable('refresh')
+			$('#table_room').bootstrapTable('refresh')
+
+
 
 		}
 	}

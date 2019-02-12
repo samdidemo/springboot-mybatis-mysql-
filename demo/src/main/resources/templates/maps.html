@@ -13,7 +13,6 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
     <link href="assets/css/animate.min.css" rel="stylesheet"/>
@@ -26,10 +25,7 @@
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/themify-icons.css" rel="stylesheet">
-
-
     <link href="proscenium/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="proscenium/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="proscenium/css/chocolat.css" type="text/css" media="screen">
@@ -38,10 +34,14 @@
     <link rel="stylesheet" href="proscenium/css/jquery-ui.css" />
     <link href="proscenium/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" src="proscenium/js/modernizr-2.6.2.min.js"></script>
-    <!--fonts-->
-    <link href="http://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Federo" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <link href="/bootstrap-table/bootstrap-table.css" rel="stylesheet" type="text/css">
+    <script src="/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <script src="/bootstrap-table/bootstrap-table.js"></script>
+    <!-- 这个汉化包可选，但是必须在bootstrap-table.js后面哦 -->
+    <script src="/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script src="jqueryform.js" type="text/javascript"></script>
 
 
 </head>
@@ -165,65 +165,11 @@
 		<div class="content">
             <div class="container-fluid">
                 <div class="card">
-                    <form class="form-horizontal" action="/order/add">
-                        <fieldset>
-                            <div class="control-group warning">
-                                <div class="controls">
-                                    <input type="text" class="form-control border-input" style="width: 20%" placeholder="姓名">
-                                </div>
-                            </div>
-                            <div class="control-group success">
-                                <label class="control-label" for="inputSuccess">Input with success</label>
-                                <div class="controls">
-                                    <input type="text" id="inputSuccess">
-                                    <span class="help-inline">Woohoo!</span>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="selectError3">Plain Select</label>
-                                <div class="controls">
-                                    <select id="selectError3">
-                                        <option>豪华双人</option>
-                                        <option>经济双人</option>
-                                        <option>豪华单人</option>
-                                        <option>经济单人</option>
-                                        <option>特价房</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">现在预定</button>
-                                <button class="btn">取消</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <form action="#" method="post">
-                        <div class="fields-w3ls form-date-w3-agileits">
-                            <input type="text" class="form-control border-input" style="width: 20%" placeholder="姓名">
+                    <div class="content table-responsive table-full-width">
+                        <div class="self">
+                            <table  id="table_money"></table>
                         </div>
-                        <div class="fields-w3ls form-left-agileits-w3layouts ">
-                            <p>房型</p>
-                            <select class="form-control">
-                                <option>Select a Room</option>
-                                <option>Luxury Room</option>
-                                <option>Deluxe Room</option>
-                                <option>Single Room</option>
-                                <option>Double Room</option>
-                            </select>
-                        </div>
-                        <div class="fields-w3ls form-date-w3-agileits">
-                            <p>到达日期</p>
-                            <input  id="datepicker1" name="Text" type="text" value="Select Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
-                        </div>
-                        <div class="fields-w3ls form-date-w3-agileits">
-                            <p>出发日期</p>
-                            <input  id="datepicker2"  autocomplete="off" name="Text" type="text" value="Select Date" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required="">
-                        </div>
-
-                        <div class=" form-left-agileits-submit">
-                            <input type="submit" value="查找房间">
-                        </div>
-                    </form>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -261,7 +207,6 @@
 
 
 </body>
-<script type="text/javascript" src="proscenium/js/jquery-2.1.4.min.js"></script>
 <!-- contact form -->
 <script src="proscenium/js/jqBootstrapValidation.js"></script>
 <script src="proscenium/js/contact_me.js"></script>
@@ -270,24 +215,120 @@
     $(function() {
         $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
     });
+    $(function my() {
+
+        var t = $("#table_money").bootstrapTable({
+            url: 'http://localhost:8080/money/page',
+            method: 'get',
+            dataType: "json",
+            striped: true,//设置为 true 会有隔行变色效果
+            undefinedText: "空",//当数据为 undefined 时显示的字符
+            pagination: true, //分页
+            clickEdit:true,
+            showRefresh: true,
+            // paginationLoop:true,//设置为 true 启用分页条无限循环的功能。
+            showToggle: "true",//是否显示 切换试图（table/card）按钮
+            showColumns: "true",//是否显示 内容列下拉框
+            pageNumber: 1,//如果设置了分页，首页页码
+            // showPaginationSwitch:true,//是否显示 数据条数选择框
+            pageSize: 10,//如果设置了分页，页面数据条数
+            pageList: [5, 10, 20, 40],	//如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。
+            paginationPreText: '‹',//指定分页条中上一页按钮的图标或文字,这里是<
+            paginationNextText: '›',//指定分页条中下一页按钮的图标或文字,这里是>
+            // singleSelect: false,//设置True 将禁止多选
+            search: true, //显示搜索框
+            data_local: "zh-US",//表格汉化
+            sidePagination: "server", //服务端处理分页
+            queryParams: function (params) {//自定义参数，这里的参数是传给后台的，我这是是分页用的
+                return {//这里的params是table提供的
+                    offset: params.offset,//从数据库第几条记录开始
+                    limit: params.limit//找多少条
+                };
+            },
+            idField: "id",//指定主键列
+            columns: [
+                {
+                    title: 'id',//表的列名
+                    field: 'id',//json数据中rows数组中的属性名
+                    align: 'center'//水平居中
+                },
+                {
+                    title: '收入来源',
+                    field: 'resourse',
+                    align: 'center'
+                },
+                {
+                    title: '账单时间',
+                    field: 'time',
+                    align: 'center'
+                },
+                {
+                    //EMAIL
+                    title: '金额',
+                    field: 'money',
+                    align: 'center',
+                    formatter: function (value, row, index) {//自定义显示，这三个参数分别是：value该行的属性，row该行记录，index该行下标
+                        if (row.money >0) {
+                            return [
+                                '<span class="label label-success">'+row.money+'</span>'
+
+                            ].join("")
+                        } else {
+                            return [
+                                '<span class="label label-danger">'+row.money+'</span>'
+
+                            ].join("")
+                        }
+                    }
+                },
+                {
+                    //部门名字
+                    title: '备注',
+                    field: 'remarks',//可以直接取到属性里面的属性，赞
+                    align: 'center'
+                },
+                {
+                    title: '金额总数',
+                    field: 'totalmoney',
+                    align: 'center',
+                    /*formatter: function (value, row, index) {//自定义显示，这三个参数分别是：value该行的属性，row该行记录，index该行下标
+                        if(row.payif==1){
+                            return[
+                                '<span class="label label-success">已付款</span>'
+
+                            ].join("")
+                        }
+                        else{
+                            return[
+                                '<span class="label label-danger">未付款</span>'
+
+                            ].join("")
+                        }
+                    }*/
+
+                },
+                {
+                    field:'button',
+                    title: '操作',
+                    /*events:operateEvents,
+                    formatter:AddFunctionAlty,*/
+                }
+
+            ]
+        });
+
+    });
 </script>
 
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>
