@@ -10,4 +10,6 @@ public interface ManageMapper {
     int insertSelective(Manage record);
     String selectPassword(String username);
     List<Manage> selectAll();
+    void insertManage(Manage manage);
+    Manage selectByName(String name);
 }

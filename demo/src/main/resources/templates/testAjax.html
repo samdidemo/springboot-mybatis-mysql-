@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/proscenium/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<script src="/jquery-3.3.1.min.js" type="text/javascript"></script>-->
+    <!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>-->
+</head>
+<p id="testajax" onclick="test()">点击</p>
+<p id="test" onclick="test1()">点击2</p>
+<p id="test1" onclick="test2()">点击2</p>
+<p id="gettoken" onclick="gettoken()">获取token</p>
+<p onclick="getTokenBybrower()">显示浏览器中的token</p>
+<p onclick="deletetoken()">删除token</p>
+<p onclick="testParmeter()">测试参数映射对象</p>
+<input id="labelUrl" type="hidden" th:value="${username}" />
+</body>
+<script>
+    function testParmeter() {
+        $.ajax({
+            url:"/test/parmeter",
+            type:"post",
+            data:{
+                id:"11123",
+                name:"sssm",
+                password:"sjjjj"
+            },
+            success:function (r) {
+                alert(r)
+            }
+        })
+    }
+    function test() {
+        $.ajax({
+            type:"get",
+            url:"/order/all",
+            dataType:"json",
+            headers:{
+                Token: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1IiwiaXNzIjoiSGlsb3giLCJpYXQiOjE1NTU1MDM2MjgsImV4cCI6MTU1NTUxMDgyOCwibmJmIjoxNTU1NTAzNjI4fQ.4Wp5FkscuxqUOp-PGIFBwl5lmjMORIbIiLZCshXdVAU"
+            },
+            success:function (data) {
+                for(i in data){
+                    $("#testajax").text(data[i].username)
+                }
+            }
+        })
+    }
+    function test1() {
+        $.ajax({
+            type:"get",
+            url:"/test/bool",
+            dataType:"json",
+            headers:{
+                Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1IiwiaXNzIjoiSGlsb3giLCJpYXQiOjE1NTU2NzgyNTgsImV4cCI6MTU1NTY4NTQ1OCwibmJmIjoxNTU1Njc4MjU4fQ.UTO8TpGAV-b5sHQaJBPWYV69xHu_tTr2t4cqcxjseBA"
+            },
+            success:function (data) {
+                alert(data)
+                window.location.href="/index"
+            }
+        })
+
+    }
+    function test2() {
+       var username=$("#labelUrl").val();
+       alert(username);
+    }
+    function gettoken() {
+        $.ajax({
+            type:"post",
+            url:"/token/login",
+            datatype:"json",
+            success:function (data) {
+                alert(data)
+                $.cookie('token',data)
+            }
+
+
+        })
+    }
+    function getTokenBybrower() {
+        alert($.cookie('token'))
+    }
+    function deletetoken() {
+        $.cookie('token',null)
+    }
+
+</script>
+</html>

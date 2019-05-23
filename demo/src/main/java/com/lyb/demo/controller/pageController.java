@@ -8,6 +8,7 @@ public class pageController {
     public String proscenium(){
         return "prosceniumIndex";
     }
+
     @GetMapping(value = "/loging")
     public String loging(){
         return "loging";

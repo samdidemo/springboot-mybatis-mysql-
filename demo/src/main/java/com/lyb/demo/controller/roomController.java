@@ -5,6 +5,8 @@ import com.lyb.demo.model.Order;
 import com.lyb.demo.model.Room;
 import com.lyb.demo.model.TableSplitResult;
 import com.lyb.demo.service.RoomService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +20,15 @@ import java.util.List;
 public class roomController {
     @Autowired
     private  RoomService roomService;
+    @ApiOperation(value="查找所有房间")
     @GetMapping(value = "/room/all")
     @ResponseBody
     public List<Room> selectAllRoom(){
         return roomService.selectAllRoom();
     }
+
+    @ApiOperation(value="分页查找房间",notes = "根据页面大小和页数")
+    @ApiImplicitParam(name = "offset",dataType = "int")
     @GetMapping(value = "/room/page")
     @ResponseBody
     public TableSplitResult<List<Room>> getRoomByPage(@RequestParam("offset") int offset, @RequestParam("limit") int limit){

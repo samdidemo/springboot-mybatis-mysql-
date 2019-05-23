@@ -20,18 +20,18 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
     </head>
 
     <body>
 
         <div class="page-container">
             <h1>Login</h1>
-            <form action="/login" method="post">
+            <form id="loginForm"  onsubmit="return false" action="##" method="post">
                 <input type="text" name="userName" class="username" placeholder="Username">
                 <input type="password" name="password" class="password" placeholder="Password">
-                <button type="submit">Sign me in</button>
+                <button type="button" onclick="loginNow()">Sign me in</button>
                 <div class="error"><span>+</span></div>
+                <p id="passwordTip" style="visibility: hidden">密码错误</p>
             </form>
         </div>
 
@@ -40,8 +40,66 @@
         <script src="Asset/js/supersized.3.2.7.min.js"></script>
         <script src="Asset/js/supersized-init.js"></script>
         <script src="Asset/js/scripts.js"></script>
+        <script src="/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 
     </body>
+<script>
+   /*function loginNow() {
+        $.ajax({
+            // async:false,
+            type:"POST",
+            url:"/login",
+            // contentType : "application/x-www-form-urlencoded; charset=utf-8",
+            data:$("#loginForm").serialize(),
+            dataType:"json",
+            success:function (result) {
+                if(result==true){
+                    // alert("成功")
+                    // window.location.href="/notifications"
+                    $.ajax({
+                        type:"post",
+                        url:"/token/login",
+                        datatype:"json",
+                        success:function (data) {
+                            alert(data)
+                            $.cookie('token',data,{ expires: 10, path: '/' })
+                            // $.ajax({
+                            //     url:"/proscenium",
+                            //     type:"get",
+                            //     header:{
+                            //         Authorization:$.cookie('token')
+                            //     },
+
+                            })
+                        }
+                    })
+                }else{
+                   document.getElementById("passwordTip").style.visibility="visible"
+                    // alert("密码错误")
+                }
+            }
+        })
+    }*/
+   function loginNow() {
+       $.ajax({
+           url:"/login",
+           type:"post",
+           dataType:"json",
+           data:$("#loginForm").serialize(),
+           success:function (result) {
+               if(result.status=="1"){
+                   window.location.href="/typography";
+               }
+               else{
+                   alert(result.message)
+               }
+           }
+
+       })
+   }
+</script>
 
 </html>
 

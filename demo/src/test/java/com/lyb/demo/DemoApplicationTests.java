@@ -23,6 +23,10 @@ public class DemoApplicationTests {
 //
 //        }
 //    }
+    @Test
+    public void test(){
+        System.out.println("fff");
+    }
 
 }
 

@@ -2,21 +2,15 @@ server:
   port: 8080
 
 spring:
-  security:
-    user:
-      name: lin
-      password: 123
-      roles: user
   datasource:
-    name: mysql_test
     type: com.alibaba.druid.pool.DruidDataSource
     #druid相关配置
     druid:
       #监控统计拦截的filters
       filters: stat
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+      url: jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
       username: root
       password: admin
       #配置初始化大小/最小/最大
@@ -36,7 +30,6 @@ spring:
       #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.lyb.demo.model

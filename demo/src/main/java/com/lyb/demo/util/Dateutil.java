@@ -13,5 +13,8 @@ public class Dateutil {
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         return simpleDateFormat.format(nowDate);
     }
+    public String test(){
+        return "ssss";
+    }
 
 }
